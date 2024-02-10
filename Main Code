@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>"Drizzle" & "Sizzle" Extra Virgin Olive Oil</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,6 +13,7 @@
 
     .outer-container {
       display: flex;
+      justify-content: space-between;
     }
 
     .container {
@@ -25,9 +24,8 @@
       border-radius: 5px;
     }
 
-    .carousel-container {
-      width: 300px;
-      margin-right: 20px;
+    h1 {
+      text-align: center;
     }
 
     .option-box {
@@ -64,47 +62,71 @@
     }
 
     .options-container {
-      display: flex;
-      justify-content: space-between;
+      margin-top: 20px;
     }
 
-    .options-container div {
-      width: calc(70% - 20px); /* Adjusted width */
+    .option {
+      margin-bottom: 20px;
       border: 1px solid #ccc;
       padding: 10px;
       border-radius: 5px;
     }
 
-    .options-container h2 {
+    .option h2 {
       margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .option p {
+      display: none;
+    }
+
+    .custom-checkbox {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .custom-checkbox:checked {
+      background-color: #ccc;
+    }
+
+    .custom-checkbox:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border-radius: 50%;
+      display: none;
+    }
+
+    .custom-checkbox:checked:after {
+      display: block;
+    }
+
+    .options-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .option-box {
+      width: 30%;
     }
   </style>
 </head>
 <body>
   <div class="outer-container">
-    <div class="carousel-container">
-      <!-- Bootstrap Carousel -->
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://via.placeholder.com/300" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://via.placeholder.com/300" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://via.placeholder.com/300" class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+    <div class="photo">
+      <img src="your_photo_url.jpg" alt="Olive Oil">
     </div>
     <div class="container">
       <h1>"Drizzle" & "Sizzle" Extra Virgin Olive Oil</h1>
@@ -118,16 +140,24 @@
           <option value="3">3 sets</option>
           <option value="6">6 sets</option>
         </select>
-        
-        <input type="radio" name="purchase-option" id="onetime" value="onetime"><label for="onetime">One-time purchase - $37</label><br>
-        <input type="radio" name="purchase-option" id="subscribe-save" value="subscribe-save"><label for="subscribe-save">Subscribe & Save - $33.3
-          <input type="radio" name="frequency" id="every-month" value="every-month"><label for="every-month">Every one month</label>
-          <input type="radio" name="frequency" id="every-two-months" value="every-two-months"><label for="every-two-months">Every two months</label>
-          <input type="radio" name="frequency" id="every-three-months" value="every-three-months"><label for="every-three-months">Every three months</label>
-        </label><br>
-        <input type="radio" name="purchase-option" id="subscribe" value="subscribe"><label for="subscribe">Subscribe - $33.3
-          <input type="checkbox"> Skip or cancel anytime
-        </label>
+      </div>
+
+      <div class="option-box">
+        <input type="radio" name="purchase-option" id="onetime" value="onetime"><label for="onetime">One-time purchase - $37</label>
+      </div>
+
+      <div class="option-box">
+        <input type="radio" name="purchase-option" id="subscribe-save" value="subscribe-save"><label for="subscribe-save">Subscribe & Save - $33.3</label>
+        <select name="frequency" id="frequency">
+          <option value="every-one-month">Every one month</option>
+          <option value="every-two-months">Every two months</option>
+          <option value="every-three-months">Every three months</option>
+        </select>
+      </div>
+
+      <div class="option-box">
+        <input type="radio" name="purchase-option" id="subscribe" value="subscribe"><label for="subscribe">Subscribe - $33.3</label>
+        <input type="checkbox" class="custom-checkbox" id="skip-cancel" name="skip-cancel"><label for="skip-cancel">Skip or cancel anytime</label>
       </div>
 
       <div class="multiple-address-box">
@@ -136,20 +166,11 @@
       </div>
 
       <div class="options-container">
-        <div>
-          <h2>Description</h2>
+        <div class="option">
+          <h2 onclick="toggleText(this)">Description</h2>
           <p>This olive oil is made from the finest olives grown in the Mediterranean region. It has a rich flavor and is perfect for use in salads, cooking, and dipping with bread.</p>
         </div>
-        <div>
-          <h2>Harvest</h2>
+        <div class="option">
+          <h2 onclick="toggleText(this)">Harvest</h2>
           <p>Olives are harvested at the perfect stage of ripeness to ensure the highest quality oil. The harvesting process involves shaking the trees or using specialized tools to collect the olives without damaging them. This ensures that only the best olives are used to produce our extra virgin olive oil.</p>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
